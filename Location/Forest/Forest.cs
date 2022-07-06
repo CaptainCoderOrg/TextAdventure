@@ -11,6 +11,7 @@ public class Forest : ILocation
         options = new List<string>();
         options.Add("Enter Cottage");
         options.Add("Examine Forest");
+        options.Add("Leave the Forest");
         //if(isDiscovered == true)
         //{
         options.Add("Examine Tunnel");
@@ -37,15 +38,18 @@ public class Forest : ILocation
                 Narrator.WriteLine("As you search the forest you find a overgrown tunnel leading into the darkness and get a strange sense of deja vu...");
                 break;
             case 3:
+                Narrator.WriteLine("You walk deeper into the forest, trying to find a way out. After a few minutes of traveling you come across a small only to realize you've travelled in a circle.");
+                break;
+            case 4:
                 //if => you don't a weapon Narrator.WriteLine("You feel a grave sense of danger lurking within the tunnel and wonder if it is truly safe to enter...");
                 //else...
                 Narrator.WriteLine("You enter the tunnel");
                 //gs.SetLocation(new Tunnel());
                 break;
-            case 4:
+            case 5:
                 Narrator.WriteLine("The tunnel seems like it was abandoned along time ago. A faint, warm wind caresses your face from its mouth.");
                 break;
-            case 5:
+            case 6:
                 Narrator.WriteLine("You shout into the tunnel and can hear your voice echo back to you before sharply cutting off.");
                 break;
             default:
