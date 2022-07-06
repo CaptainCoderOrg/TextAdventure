@@ -1,5 +1,6 @@
 public class Dungeon : ILocation 
 {
+    public static readonly Dungeon Instance = new Dungeon();
     public string Description => "You enter a dungeon. It is dark.";
     public string Name => "Dungeon";
 

@@ -1,14 +1,15 @@
 
 public class Cottage : ILocation
 {
+    public readonly static Cottage Instance = new Cottage();
     public string Description => GetDescription();
 
     public string Name => "Cottage";
     private bool hasTakenFishingPole = false;
     private bool discoveredFishingPole = false;
 
-    private ILocation _garden = new GardenPath();
     private List<string> options;
+    private List<Action<GameState>> optionResults;
 
     private string GetDescription()
     {
@@ -27,43 +28,36 @@ public class Cottage : ILocation
     public List<string> GetOptions()
     {
         options = new List<string>();
+        optionResults = new List<Action<GameState>>();
         options.Add("Exit Cottage");
+        optionResults.Add((gs) => Exit(gs));
+
         options.Add("Examine Room");
+        optionResults.Add((gs) => ExamineRoom());
+
         if (discoveredFishingPole && !hasTakenFishingPole)
         {
             options.Add("Take Fishing Pole");
+            optionResults.Add((gs) => FishingPole());
         }
         else if (hasTakenFishingPole)
         {
             options.Add("Put fishing pole on wall.");
+            optionResults.Add((gs) => FishingPole());
         }
         return options;
     }
 
     public void HandleInput(int option, GameState gs)
     {
-        string choice = options[option-1];
-        switch (choice)
-        {
-            case "Exit Cottage":
-                Exit(gs);
-                break;
-            case "Examine Room":
-                ExamineRoom();
-                break;
-            case "Put fishing pole on wall.":
-            case "Take Fishing Pole":
-                FishingPole();
-                break;
-            default:
-                break;
-        }
+        Action<GameState> action = optionResults[option-1];
+        action.Invoke(gs);
     }
 
     private void Exit(GameState gs)
     {
         Narrator.WriteLine("You exit the cottage.");
-        gs.SetLocation(_garden);
+        gs.SetLocation(Forest.Instance);
     }
 
     private void ExamineRoom()

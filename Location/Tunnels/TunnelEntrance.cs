@@ -1,6 +1,6 @@
 public class TunnelEntrance : ILocation
 {
-
+    public static readonly TunnelEntrance Instance = new TunnelEntrance();
     public string Description => "You crawl down in a large tunnel. There's a fork in the tunnel.";
 
     public string Name => "Tunnel";
@@ -25,15 +25,16 @@ public class TunnelEntrance : ILocation
         {
             case 1:
                 Narrator.WriteLine("You turn around.");
-                gs.SetLocation(new DownStairs());
+                gs.SetLocation(Forest.Instance);
                 break;
             case 2:
                 Narrator.WriteLine("You go down the right tunnel.");
-                gs.SetLocation(new RightTunnel());
+                gs.SetLocation(RightTunnel.Instance);
                 break;
             case 3:
                 Narrator.WriteLine("You go down the left tunnel.");
                 // TODO: Create Left tunnel room
+                gs.SetLocation(Dungeon.Instance);
                 break;
             default:
                 break;

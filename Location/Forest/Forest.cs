@@ -1,5 +1,6 @@
 public class Forest : ILocation
 {
+    public readonly static Forest Instance = new Forest();
     public string Description => "A dense woodline surrounds the cottage in an endless ocean of bark and leaves.";
 
     public string Name => "Forest";
@@ -30,7 +31,7 @@ public class Forest : ILocation
         switch (option) {
             case 1:
                 Narrator.WriteLine("You turn away from the forest and enter the cottage.");
-                gs.SetLocation(new DownStairs());
+                gs.SetLocation(Cottage.Instance);
                 // TODO: Connect Cottage
                 break;
             case 2:
@@ -44,7 +45,7 @@ public class Forest : ILocation
                 //if => you don't a weapon Narrator.WriteLine("You feel a grave sense of danger lurking within the tunnel and wonder if it is truly safe to enter...");
                 //else...
                 Narrator.WriteLine("You enter the tunnel");
-                //gs.SetLocation(new Tunnel());
+                gs.SetLocation(TunnelEntrance.Instance);
                 break;
             case 5:
                 Narrator.WriteLine("The tunnel seems like it was abandoned along time ago. A faint, warm wind caresses your face from its mouth.");

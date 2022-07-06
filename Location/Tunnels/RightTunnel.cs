@@ -1,5 +1,6 @@
 public class RightTunnel : ILocation
 {
+    public static readonly RightTunnel Instance = new RightTunnel();
     public string Description => "You take a sharp right turn down the tunnel and walk for 2 miles.";
 
     public string Name => "Right Tunnel";
