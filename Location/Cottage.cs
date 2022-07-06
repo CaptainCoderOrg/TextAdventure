@@ -23,15 +23,15 @@ public class Cottage : ILocation
     {
         switch (option) {
             case 1:
-                Console.WriteLine("You exit the cottage.");
+                Narrator.WriteLine("You exit the cottage.");
                 // TODO: Create OutsideCottage room
                 break;
             case 2:
-                Console.WriteLine("You go down stairs.");
+                Narrator.WriteLine("You go down stairs.");
                 gs.SetLocation(new DownStairs());
                 break;
             case 3:
-                Console.WriteLine("You examine the room");
+                Narrator.WriteLine("You examine the room");
                 break;
             default:
                 break;

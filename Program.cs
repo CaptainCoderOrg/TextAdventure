@@ -28,6 +28,7 @@ public class Program
 
     public static void Main()
     {
+        // Narrator.WriteLine("Hello World!", .1);
         GameState gs = new GameState();
         while(true)
         {

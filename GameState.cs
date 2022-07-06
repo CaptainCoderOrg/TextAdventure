@@ -5,20 +5,20 @@ public class GameState
 
     public void DisplayRoom()
     {
-        Console.WriteLine(currentLocation.Name);
-        Console.WriteLine("-------------");
-        Console.WriteLine(currentLocation.Description);
+        Narrator.WriteLine(currentLocation.Name);
+        Narrator.WriteLine("-------------");
+        Narrator.WriteLine(currentLocation.Description);
         List<string> options = currentLocation.GetOptions();
         for (int i = 0; i < options.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {options[i]}");
+            Narrator.WriteLine($"{i + 1}. {options[i]}");
         }
 
         string userInput = " ";
         int asInt = 0;
         while (int.TryParse(userInput, out asInt) == false || asInt < 1 || asInt > options.Count)
         {
-            Console.WriteLine("Select an option: ");
+            Narrator.WriteLine("Select an option: ");
             userInput = Console.ReadLine()!;
             if (userInput == null)
             {
