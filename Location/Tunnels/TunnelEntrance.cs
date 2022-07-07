@@ -4,20 +4,29 @@ public class TunnelEntrance : ILocation
     public string Description => "You crawl down in a large tunnel. There's a fork in the tunnel.";
 
     public string Name => "Tunnel";
-    private List<string> options;
+    // private List<string> options;
+    private Menu menu;
+
 
     public TunnelEntrance()
     {
-        options = new List<string>();
-        options.Add("Turn Around");
-        options.Add("Continue down the right tunnel");
-        options.Add("Continue down the left tunnel");
+        menu = new Menu();
+        MenuItem turnAround = new MenuItem("Turn Around", TurnAround);
+        menu.AddItem(turnAround);
+        MenuItem rightTunnel = new MenuItem("Turn Around", RightTunnel);
+        menu.AddItem(rightTunnel);
+        MenuItem leftTunnel= new MenuItem("Turn Around", LeftTunnel);
+        menu.AddItem(leftTunnel);
+        // options = new List<string>();
+        
+        // options.Add("Continue down the right tunnel");
+        // options.Add("Continue down the left tunnel");
     }
 
-    public List<string> GetOptions()
-    {
-        return options;
-    }
+    // public List<string> GetOptions()
+    // {
+    //     return options;
+    // }
 
     public void HandleInput(int option, GameState gs)
     {
@@ -40,4 +49,9 @@ public class TunnelEntrance : ILocation
                 break;
         }
     }
+
+
+private void TurnAround()
+    Narrator.WriteLine($"")
 }
+
