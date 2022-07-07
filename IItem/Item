@@ -1,6 +1,0 @@
-public interface IItem
-{	
-    public string name { get; }
-    void ItemEffect(){}
-    void AddToInventory();
-}

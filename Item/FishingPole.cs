@@ -1,11 +1,7 @@
 public class FishingPole : IItem
 {
-    public string name => "Fishing Pole";
+    public string Name => "Fishing Pole";
     
-    public FishingPole(string Name)
-    {
-        this.name = name;
-    }
     public void ItemEffect()
     {
         Console.WriteLine("You cast out your line!");
