@@ -9,15 +9,24 @@ public class Dungeon : ILocation
     private bool hasCandle = false;
     private bool hasLitCandle = false;
 
+    private Menu menu;
+
     public Dungeon()
     {
-        options = new List<string>();
-        options.Add("Exit dungeon");
-        options.Add("Examine the dungeon");
+        // options = new List<string>();
+        // options.Add("Exit dungeon");
+        // options.Add("Examine the dungeon");
 
-        if (hasCandle){
-            options.Add("Light a candle");
-        }
+        // if (hasCandle){
+        //     options.Add("Light a candle");
+        // }
+
+        menu = new Menu();
+        MenuItem exit = new MenuItem("Exit Dungeon", ExitDungeon);
+        menu.AddItem(exit);
+
+        MenuItem examine = new MenuItem("Examine Dungeon", ExamineDungeon);
+        menu.AddItem(examine);
     }
     public List<string> GetOptions()
     {
@@ -53,12 +62,17 @@ public class Dungeon : ILocation
     }
     private void ExitDungeon()
     {
-
+        Narrator.WriteLine("Exit the dungeon");
+        GameState.Instance.SetLocation(TunnelEntrance.Instance);
     }
 
     private void ExamineDungeon()
     {
-
+        Narrator.WriteLine("It is too dark to look around.");
+        if (!hasLitCandle){
+        Narrator.WriteLine("You examine the Dungeon");
+        GameState.Instance.SetLocation(Dungeon.Instance);
+        }
     }
 
 
