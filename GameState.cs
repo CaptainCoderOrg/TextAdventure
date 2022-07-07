@@ -1,6 +1,7 @@
 // Keeps track of location within the world
 public class GameState
 {
+    public static readonly GameState Instance = new GameState();
     private ILocation currentLocation = new Cottage();
 
     public void DisplayRoom()
