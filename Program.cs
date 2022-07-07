@@ -29,11 +29,25 @@ public class Program
     public static void Main()
     {
         // Narrator.WriteLine("Hello World!", .1);
-        GameState gs = new GameState();
-        while(true)
-        {
-            gs.DisplayRoom();
-        }
+        // GameState gs = new GameState();
+        // while(true)
+        // {
+        //     gs.DisplayRoom();
+        // }
+        Menu main = new Menu();
+        MenuItem play = new MenuItem("Play", Play);
+        MenuItem inventory = new MenuItem("Inventory", () => Narrator.WriteLine("Show Inventory!"));
+        inventory.IsHidden = true;
+        MenuItem load = new MenuItem("Load", () => Narrator.WriteLine("Load Selected"));
+        load.IsEnabled = false;
+        MenuItem exit = new MenuItem("Exit", () => Narrator.WriteLine("Exit Selected"));
+        main.AddItem(play);
+        main.AddItem(inventory);
+        main.AddItem(load);
+        main.AddItem(exit);
+        main.DisplayMenu();
     }
+
+    private static void Play() => Narrator.WriteLine("Play Selected");
 
 }
