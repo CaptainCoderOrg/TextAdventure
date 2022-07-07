@@ -1,14 +1,18 @@
 public class FishingPole : IItem
 {
-    string name;
+    public string name => "Fishing Pole";
     
     public FishingPole(string Name)
     {
-        name = Name;
+        this.name = name;
     }
     public void ItemEffect()
     {
         Console.WriteLine("You cast out your line!");
     }
-    public void AddToInventory(){}
+    public void AddToInventory(Player player)
+    {
+        player.Inventory.Add(this);
+
+    }
 }
