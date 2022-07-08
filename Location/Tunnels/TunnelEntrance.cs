@@ -5,28 +5,19 @@ public class TunnelEntrance : ILocation
 
     public string Name => "Tunnel";
     // private List<string> options;
-    private Menu menu;
+    public Menu LocationMenu { get; }
 
 
     public TunnelEntrance()
     {
-        menu = new Menu();
-        MenuItem turnAround = new MenuItem("Turn Around", TurnAround);
-        menu.AddItem(turnAround);
-        MenuItem rightTunnel = new MenuItem("Turn Around", RightTunnel);
-        menu.AddItem(rightTunnel);
-        MenuItem leftTunnel= new MenuItem("Turn Around", LeftTunnel);
-        menu.AddItem(leftTunnel);
-        // options = new List<string>();
-        
-        // options.Add("Continue down the right tunnel");
-        // options.Add("Continue down the left tunnel");
+        LocationMenu = new Menu();
+        MenuItem TurnAround = new MenuItem("Turn Around", GoTurnAround);
+        LocationMenu.AddItem(TurnAround);
+        MenuItem RightTunnel = new MenuItem("Turn Around", GoRightTunnel);
+        LocationMenu.AddItem(RightTunnel);
+        MenuItem LeftTunnel = new MenuItem("Turn Around", GoLeftTunnel);
+        LocationMenu.AddItem(LeftTunnel);
     }
-
-    // public List<string> GetOptions()
-    // {
-    //     return options;
-    // }
 
     public void HandleInput(int option, GameState gs)
     {
@@ -51,7 +42,20 @@ public class TunnelEntrance : ILocation
     }
 
 
-private void TurnAround()
-    Narrator.WriteLine($"")
+    private void GoTurnAround() {
+        Narrator.WriteLine("You turn around and head back.");
+        GameState.Instance.SetLocation(Forest.Instance);
+    }
+
+    private void GoRightTunnel() {
+        Narrator.WriteLine("You head down the right tunnel.");
+        GameState.Instance.SetLocation(RightTunnel.Instance);
+    }
+
+    private void GoLeftTunnel() {
+        Narrator.WriteLine("You head down the left tunnel.");
+        // TODO: Add set location for left tunnel when we make one
+    }
+    
 }
 
