@@ -7,17 +7,23 @@ public class Cottage : ILocation
     public string Name => "Cottage";
     private bool hasTakenFishingPole = false;
     private bool discoveredFishingPole = false;
+    private readonly MenuItem _getPole, _takePole;
 
-    private Menu menu;
+    public Menu LocationMenu { get; }
 
-    private List<string> options;
-    private List<Action<GameState>> optionResults;
-
-    public Cottage ()
+    public Cottage()
     {
-        menu = new Menu();
-        MenuItem exit = new MenuItem("Exit Cottage", Exit);
-        menu.AddItem(exit);
+        LocationMenu = new Menu();
+        MenuItem exit = new ("Exit Cottage", Exit);
+        MenuItem examine = new MenuItem("Examine room", ExamineRoom);
+        _getPole = new MenuItem("Take fishing pole", FishingPole);
+        _takePole = new MenuItem("Put fishing pole on wall", FishingPole);
+        _getPole.IsEnabled = false;
+        _takePole.IsEnabled = false;
+        LocationMenu.AddItem(exit);
+        LocationMenu.AddItem(examine);
+        LocationMenu.AddItem(_getPole);
+        LocationMenu.AddItem(_takePole);
     }
 
     private string GetDescription()
@@ -34,35 +40,6 @@ public class Cottage : ILocation
         return desc;
     }
 
-    public List<string> GetOptions()
-    {
-        options = new List<string>();
-        // optionResults = new List<Action<GameState>>();
-        // options.Add("Exit Cottage");
-        // optionResults.Add((gs) => Exit(gs));
-
-        // options.Add("Examine Room");
-        // optionResults.Add((gs) => ExamineRoom());
-
-        // if (discoveredFishingPole && !hasTakenFishingPole)
-        // {
-        //     options.Add("Take Fishing Pole");
-        //     optionResults.Add((gs) => FishingPole());
-        // }
-        // else if (hasTakenFishingPole)
-        // {
-        //     options.Add("Put fishing pole on wall.");
-        //     optionResults.Add((gs) => FishingPole());
-        // }
-        return options;
-    }
-
-    public void HandleInput(int option, GameState gs)
-    {
-        Action<GameState> action = optionResults[option-1];
-        action.Invoke(gs);
-    }
-
     private void Exit()
     {
         Narrator.WriteLine("You exit the cottage.");
@@ -75,6 +52,7 @@ public class Cottage : ILocation
         if (!hasTakenFishingPole)
         {
             Narrator.Write(" On the wall is your fishing pole.");
+            _getPole.IsEnabled = true;
         }
         Narrator.WriteLine("");
         discoveredFishingPole = true;
@@ -86,11 +64,15 @@ public class Cottage : ILocation
         {
             Narrator.WriteLine("You take the fishing pole off the wall and jam it into your pocket.");
             hasTakenFishingPole = true;
+            _getPole.IsEnabled = false;
+            _takePole.IsEnabled = true;
         }
         else
         {
             Narrator.WriteLine("You take the fishing pole from your pocket and hang it on the wall.");
             hasTakenFishingPole = false;
+            _getPole.IsEnabled = true;
+            _takePole.IsEnabled = false;
         }
 
     }
