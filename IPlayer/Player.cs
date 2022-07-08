@@ -1,10 +1,13 @@
+//To do: max hitpoints, math clamp hitpoints
+
+
 public class Player
 {
-	int hp {get; set;}
+	public int Hp {get; set;}
 	public List<IItem> Inventory = new List<IItem>();
 	
-	Player(int Hp)
+	Player(int hp)
 	{
-		hp = Hp;
+		this.Hp = hp;
 	}
 }
