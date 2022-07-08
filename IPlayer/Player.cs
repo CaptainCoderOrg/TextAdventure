@@ -1,13 +1,12 @@
 //To do: max hitpoints, math clamp hitpoints
 
 
-public class Player
+public class Player : LivingEntity
 {
-	public int Hp {get; set;}
-	public List<IItem> Inventory = new List<IItem>();
-	
-	Player(int hp)
-	{
-		this.Hp = hp;
-	}
+	public Player(int hp, int level) : base(hp, level) {}
+
+    public void DisplayStatus()
+    {
+        Narrator.WriteLine($"Level: {this.Level} | HP: {this.Hp} / {this.MaxHp}");
+    }
 }
