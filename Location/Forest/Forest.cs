@@ -3,29 +3,30 @@ public class Forest : ILocation
     public readonly static Forest Instance = new Forest();
     public string Description => "A dense woodline surrounds the cottage in an endless ocean of bark and leaves.";
 
+    public Menu menu;
     public string Name => "Forest";
     //public bool isTunnelDiscovered = false;
-    private List<string> options;
+    private List<string> options = new List<string>();
 
     public Forest()
     {
-        options = new List<string>();
-        options.Add("Enter Cottage");
-        options.Add("Examine Forest");
-        options.Add("Leave the Forest");
-        //if(isDiscovered == true)
-        //{
-        options.Add("Examine Tunnel");
-        options.Add("Shout into Tunnel");
-        options.Add("Enter Tunnel");
-        //}
+        menu = new Menu();
+        MenuItem exit = new MenuItem("Enter Cottage", EnterCottage);
+        menu.AddItem(exit);
+
     }
 
-    public List<string> GetOptions()
+     public List<string> GetOptions()
+     {
+         return options;
+     }
+
+    private void EnterCottage()
     {
-        return options;
+        Narrator.WriteLine("You turn away from the forest and enter the cottage.");
+        GameState.Instance.SetLocation(Cottage.Instance);
+        // TODO: Connect Cottage
     }
-
     public void HandleInput(int option, GameState gs)
     {
         switch (option) {
