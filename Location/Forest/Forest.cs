@@ -26,11 +26,6 @@ public class Forest : ILocation
 
     }
 
-    public List<string> GetOptions()
-    {
-        return options;
-    }
-
     private void EnterCottage()
     {
         Narrator.WriteLine("You turn away from the forest and enter the cottage.");
