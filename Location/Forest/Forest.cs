@@ -6,7 +6,6 @@ public class Forest : ILocation
     public Menu LocationMenu { get; }
     public string Name => "Forest";
     //public bool isTunnelDiscovered = false;
-    private List<string> options = new List<string>();
 
     public Forest()
     {
@@ -24,11 +23,6 @@ public class Forest : ILocation
         LocationMenu.AddItem(examinetunnel);
         LocationMenu.AddItem(shoutintotunnel);
 
-    }
-
-    public List<string> GetOptions()
-    {
-        return options;
     }
 
     private void EnterCottage()
