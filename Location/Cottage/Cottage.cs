@@ -15,7 +15,7 @@ public class Cottage : ILocation
     {
         LocationMenu = new Menu();
         MenuItem exit = new ("Exit Cottage", Exit);
-        MenuItem examine = new MenuItem("Examine room", ExamineRoom);
+        MenuItem examine = new ("Examine room", ExamineRoom);
         _getPole = new MenuItem("Take fishing pole", FishingPole);
         _takePole = new MenuItem("Put fishing pole on wall", FishingPole);
         _getPole.IsEnabled = false;
