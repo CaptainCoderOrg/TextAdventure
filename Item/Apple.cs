@@ -4,7 +4,7 @@
 		
 		public void ItemEffect(Player player)
 		{
-			player.hp += 5;
+			player.Hp += 5;
 			player.Inventory.Remove(this);
 		}
 		
