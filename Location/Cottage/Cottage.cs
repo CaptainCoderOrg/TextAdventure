@@ -8,8 +8,17 @@ public class Cottage : ILocation
     private bool hasTakenFishingPole = false;
     private bool discoveredFishingPole = false;
 
+    private Menu menu;
+
     private List<string> options;
     private List<Action<GameState>> optionResults;
+
+    public Cottage ()
+    {
+        menu = new Menu();
+        MenuItem exit = new MenuItem("Exit Cottage", Exit);
+        menu.AddItem(exit);
+    }
 
     private string GetDescription()
     {
@@ -28,23 +37,23 @@ public class Cottage : ILocation
     public List<string> GetOptions()
     {
         options = new List<string>();
-        optionResults = new List<Action<GameState>>();
-        options.Add("Exit Cottage");
-        optionResults.Add((gs) => Exit(gs));
+        // optionResults = new List<Action<GameState>>();
+        // options.Add("Exit Cottage");
+        // optionResults.Add((gs) => Exit(gs));
 
-        options.Add("Examine Room");
-        optionResults.Add((gs) => ExamineRoom());
+        // options.Add("Examine Room");
+        // optionResults.Add((gs) => ExamineRoom());
 
-        if (discoveredFishingPole && !hasTakenFishingPole)
-        {
-            options.Add("Take Fishing Pole");
-            optionResults.Add((gs) => FishingPole());
-        }
-        else if (hasTakenFishingPole)
-        {
-            options.Add("Put fishing pole on wall.");
-            optionResults.Add((gs) => FishingPole());
-        }
+        // if (discoveredFishingPole && !hasTakenFishingPole)
+        // {
+        //     options.Add("Take Fishing Pole");
+        //     optionResults.Add((gs) => FishingPole());
+        // }
+        // else if (hasTakenFishingPole)
+        // {
+        //     options.Add("Put fishing pole on wall.");
+        //     optionResults.Add((gs) => FishingPole());
+        // }
         return options;
     }
 
@@ -54,10 +63,10 @@ public class Cottage : ILocation
         action.Invoke(gs);
     }
 
-    private void Exit(GameState gs)
+    private void Exit()
     {
         Narrator.WriteLine("You exit the cottage.");
-        gs.SetLocation(Forest.Instance);
+        GameState.Instance.SetLocation(Forest.Instance);
     }
 
     private void ExamineRoom()
