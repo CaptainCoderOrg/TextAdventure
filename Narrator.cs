@@ -2,7 +2,7 @@
 public class Narrator
 {
 
-    public static bool DebugMode = false;
+    public static bool DebugMode = true;
 
     public static void Write(string toWrite, double delay = .05)
     {

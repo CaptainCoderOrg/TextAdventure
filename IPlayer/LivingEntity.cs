@@ -38,4 +38,9 @@ public class LivingEntity
 
     }
     public void UseSkill(){}
+
+    public void UseItem(IItem item)
+    {
+        item.ItemEffect();
+    }
 }
