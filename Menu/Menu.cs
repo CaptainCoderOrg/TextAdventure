@@ -34,7 +34,7 @@ public class Menu
         userInput = userInput.ToLower().Trim();
         if (options.TryGetValue(userInput, out MenuItem? menuItem))
         {
-            HandleStringChoice(menuItem, userInput);
+            return HandleStringChoice(menuItem, userInput);
         }
         else if (int.TryParse(userInput, out int choice))
         {

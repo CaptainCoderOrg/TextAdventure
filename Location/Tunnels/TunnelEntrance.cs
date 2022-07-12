@@ -4,7 +4,6 @@ public class TunnelEntrance : ILocation
     public string Description => "You crawl down in a large tunnel. There's a fork in the tunnel.";
 
     public string Name => "Tunnel";
-    // private List<string> options;
     public Menu LocationMenu { get; }
 
 
@@ -13,9 +12,9 @@ public class TunnelEntrance : ILocation
         LocationMenu = new Menu();
         MenuItem TurnAround = new MenuItem("Turn Around", GoTurnAround);
         LocationMenu.AddItem(TurnAround);
-        MenuItem RightTunnel = new MenuItem("Turn Around", GoRightTunnel);
+        MenuItem RightTunnel = new MenuItem("Right Tunnel", GoRightTunnel);
         LocationMenu.AddItem(RightTunnel);
-        MenuItem LeftTunnel = new MenuItem("Turn Around", GoLeftTunnel);
+        MenuItem LeftTunnel = new MenuItem("Left Tunnel", GoLeftTunnel);
         LocationMenu.AddItem(LeftTunnel);
     }
 
@@ -26,7 +25,7 @@ public class TunnelEntrance : ILocation
 
     private void GoRightTunnel() {
         Narrator.WriteLine("You head down the right tunnel.");
-        GameState.Instance.SetLocation(RightTunnel.Instance);
+        GameState.Instance.SetLocation(LeftTunnel.Instance);
     }
 
     private void GoLeftTunnel() {
