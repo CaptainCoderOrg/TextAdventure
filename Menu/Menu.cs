@@ -29,17 +29,21 @@ public class Menu
         HandleChoice(userChoice, numberedItems);
     }
 
-    public bool HandleChoice(string userInput, List<MenuItem> numberedItems)
+    public bool HandleChoice(string userInput, List<MenuItem> numberedItems)//, Player player)
     {
         userInput = userInput.ToLower().Trim();
         if (options.TryGetValue(userInput, out MenuItem? menuItem))
         {
-            HandleStringChoice(menuItem, userInput);
+            return HandleStringChoice(menuItem, userInput);
         }
         else if (int.TryParse(userInput, out int choice))
         {
             return HandleNumberedChoice(choice, userInput, numberedItems);
         }
+        // else if(userInput == "use item")
+        // {
+        //     player.DisplayInventory();
+        // }
 
         Narrator.WriteLine($"I don't know how to '{userInput}'.");
         return false;
