@@ -9,9 +9,14 @@ public class Chimera : LivingEntity
 
   }
 
-  public void UseSkill(LivingEntity target)
+  public void UseSkill(LivingEntity target, params LivingEntity[] otherTargets)
   {
+      //AoE Breath Attack!
       Console.WriteLine("The chimera's breath erupts in a burst of flame!");
-      target.Hp -= 15;
+      foreach(LivingEntity entity in otherTargets)
+      {
+        entity.Hp -= 10;
+
+      }
   }
 }
