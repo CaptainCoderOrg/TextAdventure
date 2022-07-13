@@ -28,6 +28,8 @@ public class Cottage : ILocation
 
     public Cottage()
     {
+        Narrator.AddKeyWords(ConsoleColor.Green, "cottage");
+        Narrator.AddKeyWords(ConsoleColor.Yellow, "pole");
         _locationMenu = new Menu();
         MenuItem exit = new("Exit Cottage", Exit);
         MenuItem examine = new("Examine room", ExamineRoom);
@@ -78,32 +80,16 @@ public class Cottage : ILocation
     {
         ConsoleColor orig = Console.ForegroundColor;
         Narrator.WriteLine("-----------");
-        Narrator.Write("| ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Narrator.Write("Cottage");
-        Console.ForegroundColor = orig;
-        Narrator.WriteLine(" |");
+        Narrator.WriteLine("| Cottage |");
         Narrator.WriteLine("-----------\n");
-        Narrator.Write("You are standing in a small ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Narrator.Write("cottage");
-        Console.ForegroundColor = orig;
-        Narrator.Write(". ");
+        Narrator.Write("You are standing in a small cottage.");
         if (HasPole)
         {
-            Narrator.Write(" There is a spot on the wall to hang a fishing ");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Narrator.Write("pole");
-            Console.ForegroundColor = orig;
-            Narrator.Write(".");
+            Narrator.Write(" There is a spot on the wall to hang a fishing pole.");
         }
         else if (_hasExaminedRoom && !HasPole)
         {
-            Narrator.Write(" There is a fishing ");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Narrator.Write("pole");
-            Console.ForegroundColor = orig;
-            Narrator.Write(" hanging on the wall.");
+            Narrator.Write(" There is a fishing pole hanging on the wall.");
         }
         Narrator.WriteLine("");
     }
@@ -117,66 +103,34 @@ public class Cottage : ILocation
 
     private void Exit()
     {
-        ConsoleColor orig = Console.ForegroundColor;
-        Narrator.Write("You exit the ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Narrator.Write("cottage");
-        Console.ForegroundColor = orig;
-        Narrator.WriteLine(".");
+        Narrator.Write("You exit the cottage.");
         GameState.Instance.SetLocation(Forest.Instance);
     }
 
     private void ExamineRoom()
     {
-        ConsoleColor orig = Console.ForegroundColor;
-        Narrator.Write("This is your home, a small ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Narrator.Write("cottage");
-        Console.ForegroundColor = orig;
-        Narrator.Write(".");
+        Narrator.Write("This is your home, a small cottage.");
         if (!HasPole)
         {
-            Narrator.Write(" On the wall is your fishing ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Narrator.Write("pole");
-            Console.ForegroundColor = orig;
-            Narrator.Write(".");
+            Narrator.Write(" On the wall is your fishing pole.");
             _getPole.IsEnabled = true;
         }
-        Narrator.Write(" There is a ");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Narrator.Write("doorway");
-        Console.ForegroundColor = orig;
-        Narrator.Write(" leading further into the cottage and an ");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Narrator.Write("exit");
-        Console.ForegroundColor = orig;
-        Narrator.Write(" leading out of the cottage.");
-        Narrator.WriteLine("");
+        Narrator.WriteLine(" There is a doorway leading further into the cottage and an exit leading out of the cottage.");
         _hasExaminedRoom = true;
     }
 
     private void FishingPole()
     {
-        ConsoleColor orig = Console.ForegroundColor;
         if (!GameState.Instance.Player.Inventory.Contains(_fishingPole))
         {
-            Narrator.Write("You take the fishing ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Narrator.Write("pole");
-            Console.ForegroundColor = orig;
-            Narrator.WriteLine(" off the wall and jam it into your pocket.");
+            Narrator.WriteLine("You take the fishing pole off the wall and jam it into your pocket.");
             _fishingPole.AddToInventory(GameState.Instance.Player);
             _getPole.IsEnabled = false;
             _putPole.IsEnabled = true;
         }
         else
         {
-            Narrator.WriteLine("You take the fishing ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Narrator.Write("pole");
-            Console.ForegroundColor = orig;
-            Console.WriteLine(" from your pocket and hang it on the wall.");
+            Narrator.WriteLine("You take the fishing pole from your pocket and hang it on the wall.");
             GameState.Instance.Player.Inventory.Remove(_fishingPole);
             _getPole.IsEnabled = true;
             _putPole.IsEnabled = false;

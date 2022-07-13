@@ -9,7 +9,7 @@ public class ShortSword : IItem
     }
     public void AddToInventory(Player player)
     {
-        player.Inventory.Add(this);
+        player.playerInventory.AddToInventory(this);
 
     }
 }

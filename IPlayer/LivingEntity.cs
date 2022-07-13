@@ -1,6 +1,5 @@
 //classes? hp set based on level. Inventory complexity? Skills?
 // TODO: add enum type for the changing state of the hp or level (increased, dereased, or same)
-using System;
 public class LivingEntity
 {
     private int _hp;
@@ -12,8 +11,8 @@ public class LivingEntity
     public bool IsDead => Hp <= 0;
     public bool IsAlive => !IsDead;
 
-    
-    public readonly List<IItem> Inventory = new List<IItem>();
+    //Is this the correct way to make this?
+    public readonly Inventory inventory = new Inventory();
 
     public LivingEntity(int hp, int maxHp, int level) {
         this.MaxHp = maxHp;
@@ -38,9 +37,4 @@ public class LivingEntity
 
     }
     public void UseSkill(){}
-
-    public void UseItem(IItem item)
-    {
-        item.ItemEffect();
-    }
 }
