@@ -83,7 +83,4 @@ public class Narrator
     /// </summary>
     public static void ClearAllKeyWords() => _keywords.Clear();
 
-
-    
-
 }
