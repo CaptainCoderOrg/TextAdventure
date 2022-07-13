@@ -1,7 +1,5 @@
 //classes? hp set based on level. Inventory complexity? Skills?
 // TODO: add enum type for the changing state of the hp or level (increased, dereased, or same)
-using System;
-
 public class LivingEntity
 {
     private int _hp;
