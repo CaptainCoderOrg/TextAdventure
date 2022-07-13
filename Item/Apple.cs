@@ -5,12 +5,12 @@
 		public void ItemEffect(Player player)
 		{
 			player.Hp += 5;
-			player.Inventory.Remove(this);
+			player.playerInventory.RemoveFromInventory(this);
 		}
 		
 		public void AddToInventory(Player player)
 		{
-			player.Inventory.Add(this);
+			player.playerInventory.AddToInventory(this);
 
 		}
 	}

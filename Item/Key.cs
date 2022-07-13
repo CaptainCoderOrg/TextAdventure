@@ -9,7 +9,7 @@
 		
 		public void AddToInventory(Player player)
 		{
-			player.Inventory.Add(this);
+			player.playerInventory.AddToInventory(this);
 
 		}
 	}

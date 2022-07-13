@@ -5,6 +5,7 @@ public class Player : LivingEntity
 {
     public Menu inventoryMenu = new Menu();
     public Player(int hp, int level) : base(hp, level) { }
+    public readonly Inventory playerInventory = new Inventory();
 
     public void DisplayStatus()
     {
@@ -35,20 +36,4 @@ public class Player : LivingEntity
         // TODO: Implement color changing ability
         Narrator.Write($"{this.Level}");
     }
-
-    public void DisplayInventory()
-    {
-        foreach(IItem item in Inventory)
-        {
-            Narrator.WriteLine($"{item}");
-            // MenuItem item = new MenuItem($"{item}", UseItem(item));
-            // inventoryMenu.AddItem();
-        }
-
-    }
-
-    // private void UseItem(IItem item)
-    // {
-    //     item.ItemEffect();
-    // }
 }
