@@ -1,6 +1,7 @@
 public class Inventory
 {
 	Dictionary<string, IItem> ItemsInInventory = new Dictionary<string, IItem>();
+  Dictionary<(IItem, IItem), IItem> Recipes = new ();
 	
 	
 	public void AddToInventory(IItem item)
@@ -27,6 +28,10 @@ public class Inventory
 		{
 			IItem x = ItemsInInventory[item];
 			x.ItemEffect();
+        if(x.IsConsumable() == true)
+        {
+         RemoveFromInventory(x);
+        }
 		}
 		else
 		{
