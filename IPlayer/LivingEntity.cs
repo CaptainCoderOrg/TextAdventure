@@ -3,6 +3,18 @@
 using System;
 public class LivingEntity
 {
+    // When ActionTimer == 0, the LivingEntity can do an action
+    public string Name { get; set; }
+    public int ActionTimer { get; set; } 
+    public int Speed {get; set;}
+    public bool IsReady => ActionTimer <= 0;
+    // public Weapon LeftHand { get; set; }
+    public void CombatTick(){
+        if (ActionTimer == 0) {
+            ActionTimer -= (Speed * Weapon.SpeedMultiplier);
+            // IsReady = true;
+    }
+    }
     private int _hp;
     private int _prevHp;
     public bool _didHpDecrease;
@@ -33,9 +45,11 @@ public class LivingEntity
         this._hp = Math.Clamp(hp, 0, this.MaxHp);
     }
 
-    public void Attack()
+    public void Attack(Player player)
     {
-
+        // if (IsReady = true){
+        //   player.Hp--;
+        // }
     }
     public void UseSkill(){}
 

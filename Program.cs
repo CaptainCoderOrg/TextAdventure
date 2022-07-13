@@ -34,15 +34,18 @@ public class Program
 
     public static void Main()
     {        
+        Encounter.Test();
+        
+        // while(GameState.Instance.Player.IsAlive)
+        // {
+        //     GameState.Instance.Player.DisplayStatus();
+        //     GameState.Instance.DisplayRoom();
+        // }
+        // Narrator.WriteLine("You Died!");
 
         // Narrator.WriteLine("Hello World!", .1);
         //while GameOver = false?
-        while(GameState.Instance.Player.IsAlive)
-        {
-            GameState.Instance.Player.DisplayStatus();
-            GameState.Instance.DisplayRoom();
-        }
-        Narrator.WriteLine("You Died!");
+        
         // Menu main = new Menu();
         // MenuItem play = new MenuItem("Play", Play);
         // MenuItem inventory = new MenuItem("Inventory", () => Narrator.WriteLine("Show Inventory!"));
