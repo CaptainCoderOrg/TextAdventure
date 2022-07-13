@@ -4,7 +4,11 @@
 public class Player : LivingEntity
 {
     public Menu inventoryMenu = new Menu();
-    public Player(int hp, int level) : base(hp, level) { }
+    public Player(int hp, int level) : base(hp, level)
+    {
+        this.hpState = StateOfChange.Same;
+        this.levelState = StateOfChange.Same;
+    }
 
     public void DisplayStatus()
     {
@@ -18,27 +22,49 @@ public class Player : LivingEntity
 
     private void DisplayHp()
     {
-        if (this._didHpDecrease)
+        switch (this.hpState)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            case StateOfChange.Decreased:
+                Console.ForegroundColor = ConsoleColor.Red;
+                break;
+            case StateOfChange.Increased:
+                Console.ForegroundColor = ConsoleColor.Green;
+                break;
+            case StateOfChange.Same:
+                Console.ForegroundColor = ConsoleColor.White;
+                break;
+            default:
+                break;
         }
-        else
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-        }
+        this.hpState = StateOfChange.Same;
         Narrator.Write($"{this.Hp}");
         Console.ForegroundColor = ConsoleColor.White;
     }
 
     private void DisplayLevel()
     {
-        // TODO: Implement color changing ability
+        switch (this.levelState)
+        {
+            case StateOfChange.Decreased:
+                Console.ForegroundColor = ConsoleColor.Red;
+                break;
+            case StateOfChange.Increased:
+                Console.ForegroundColor = ConsoleColor.Green;
+                break;
+            case StateOfChange.Same:
+                Console.ForegroundColor = ConsoleColor.White;
+                break;
+            default:
+                break;
+        }
+        this.levelState = StateOfChange.Same;
         Narrator.Write($"{this.Level}");
+        Console.ForegroundColor = ConsoleColor.White;
     }
 
     public void DisplayInventory()
     {
-        foreach(IItem item in Inventory)
+        foreach (IItem item in Inventory)
         {
             Narrator.WriteLine($"{item}");
             // MenuItem item = new MenuItem($"{item}", UseItem(item));
