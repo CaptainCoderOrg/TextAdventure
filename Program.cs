@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //
-
+// Test
 // Planning:
 // Text Adventure:
 // What classes / interfaces do we need?
