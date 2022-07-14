@@ -2,7 +2,6 @@ public class Forest : ILocation
 {
     public readonly static Forest Instance = new Forest();
     public readonly static Tree tree = new Tree();
-    public Player player = new Player(5,1); //Need to be able to reference the same player in multiple areas. Player static readonly player required?
     public string Description => "A dense woodline surrounds the cottage in an endless ocean of bark and leaves.";
 
 

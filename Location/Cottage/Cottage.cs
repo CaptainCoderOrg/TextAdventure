@@ -20,7 +20,7 @@ public class Cottage : ILocation
     public string Name => "";
     private readonly IItem _fishingPole = new FishingPole();
     private bool _hasExaminedRoom = false;
-    private bool HasPole => GameState.Instance.Player.Inventory.Contains(_fishingPole);
+    private bool HasPole => GameState.Instance.Player.playerInventory.ItemsInInventory.ContainsKey(_fishingPole.Name);
     private readonly MenuItem _getPole, _putPole, _pole, _door;
 
     private readonly Menu _locationMenu;
@@ -121,7 +121,7 @@ public class Cottage : ILocation
 
     private void FishingPole()
     {
-        if (!GameState.Instance.Player.Inventory.Contains(_fishingPole))
+        if (!GameState.Instance.Player.playerInventory.ItemsInInventory.ContainsKey(_fishingPole.Name))
         {
             Narrator.WriteLine("You take the fishing pole off the wall and jam it into your pocket.");
             _fishingPole.AddToInventory(GameState.Instance.Player);
@@ -131,7 +131,7 @@ public class Cottage : ILocation
         else
         {
             Narrator.WriteLine("You take the fishing pole from your pocket and hang it on the wall.");
-            GameState.Instance.Player.Inventory.Remove(_fishingPole);
+            GameState.Instance.Player.playerInventory.RemoveFromInventory(_fishingPole);
             _getPole.IsEnabled = true;
             _putPole.IsEnabled = false;
         }

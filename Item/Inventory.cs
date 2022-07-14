@@ -1,6 +1,6 @@
 public class Inventory
 {
-	Dictionary<string, IItem> ItemsInInventory = new Dictionary<string, IItem>();
+	public Dictionary<string, IItem> ItemsInInventory = new   Dictionary<string, IItem>();
   Dictionary<(IItem, IItem), IItem> Recipes = new ();
 	
 	

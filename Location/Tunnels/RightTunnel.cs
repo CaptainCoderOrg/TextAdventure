@@ -6,7 +6,7 @@ public class RightTunnel : ILocation
     public IItem TunnelKey { get; } = new TunnelKey();
 
     public string Name => "Right Tunnel";
-    public bool hasHiddenKey => GameState.Instance.Player.Inventory.Contains(TunnelKey);
+    public bool hasHiddenKey => GameState.Instance.Player.playerInventory.ItemsInInventory.ContainsKey(TunnelKey.Name);
 
     public Menu LocationMenu { get; }
 

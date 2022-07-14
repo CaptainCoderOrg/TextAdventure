@@ -2,7 +2,7 @@
 public class GameState
 {
     public static readonly GameState Instance = new ();
-    public readonly Player Player = new (10, 1);
+    public readonly Player Player = new (10, 1, new Inventory());
     private ILocation currentLocation = new Cottage();
 
     public void DisplayRoom()

@@ -4,8 +4,8 @@
 public class Player : LivingEntity
 {
     public Menu inventoryMenu = new Menu();
-    public Player(int hp, int level) : base(hp, level) { }
     public readonly Inventory playerInventory = new Inventory();
+    public Player(int hp, int level, Inventory playerInventory) : base(hp, level) { }
 
     public void DisplayStatus()
     {

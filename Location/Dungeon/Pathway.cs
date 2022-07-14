@@ -7,8 +7,8 @@ public class Pathway : ILocation
     private readonly IItem _LongSword = new LongSword();
     private readonly IItem _ShortSword = new ShortSword();
 
-    private bool hasTakenLongSword => GameState.Instance.Player.Inventory.Contains(_LongSword);
-    private bool hasTakenShortSword => GameState.Instance.Player.Inventory.Contains(_ShortSword);
+    private bool hasTakenLongSword => GameState.Instance.Player.playerInventory.ItemsInInventory.ContainsKey(_LongSword.Name);
+    private bool hasTakenShortSword => GameState.Instance.Player.playerInventory.ItemsInInventory.ContainsKey(_ShortSword.Name);
     private bool discoveredLongSword = false;
     private bool discoveredShortSword = false;
     private readonly MenuItem _getLongSword, _getShortSword;
