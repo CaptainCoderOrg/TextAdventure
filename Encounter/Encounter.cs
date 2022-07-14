@@ -28,56 +28,46 @@ public class Encounter
         Console.Clear();
         string screen = _screenTemplate;
         string rows = "";
-        LivingEntity currEntity;
-        Player currPlayer;
 
         int rowCount = Math.Max(_enemies.Count, _players.Count);
         for (int i = 0; i < rowCount; i++)
         {
             string row = _rowTemplate;
-            if (i < _enemies.Count)
-            {
-                currEntity = _enemies[i];
-                string enemyName = currEntity.Name.Length <= 12 ? currEntity.Name.PadRight(12) : currEntity.Name.PadRight(12).Substring(0, 9) + "...";
-                row = row.Replace("{NAME}".PadRight(12), enemyName);
-                row = row.Replace("{HP}".PadRight(3), currEntity.Hp.ToString().PadLeft(3));
-                row = row.Replace("{MAX_HP}".PadRight(3), currEntity.MaxHp.ToString().PadLeft(3));
-            } 
-            else {
-                row = row.Replace("{NAME}".PadRight(12), string.Empty.PadRight(12));
-                row = row.Replace("{HP}".PadRight(3), string.Empty.PadLeft(3));
-                row = row.Replace("{MAX_HP}".PadRight(3), string.Empty.PadLeft(3));
-            }
-            if (i < _players.Count)
-            {
-                currPlayer = _players[i];
-                string playerName = currPlayer.Name.Length <= 12 ? currPlayer.Name.PadRight(12) : currPlayer.Name.PadRight(12).Substring(0, 10) + "...";
-                row = row.Replace("{Player Name}".PadRight(11), playerName);
-                row = row.Replace("{pHP}".PadRight(3), currPlayer.Hp.ToString().PadLeft(2));
-                row = row.Replace("{pMAX_HP}".PadRight(3), currPlayer.MaxHp.ToString().PadLeft(3));
-            }
-            else
-            {
-                row = row.Replace("{Player Name}".PadRight(11), string.Empty.PadRight(13));
-                row = row.Replace("{pHP}".PadRight(3), string.Empty.PadLeft(2));
-                row = row.Replace("{pMAX_HP}".PadRight(3), string.Empty.PadLeft(3));
-            }
-            rows += row + "\n";
+            LivingEntity? enemy = i < _enemies.Count ? _enemies[i] : null;
+            Player? player = i < _players.Count ? _players[i] : null;
+            rows += AddRow(enemy, player) + "\n";        
         }
-
-        // foreach (LivingEntity entity in _enemies)
-        // {
-        //     string row = _rowTemplate;
-        //     string name = entity.Name.Length <= 13 ? entity.Name.PadRight(13) : entity.Name.PadRight(13).Substring(0, 10) + "...";
-        //     row = row.Replace("{NAME}".PadRight(13), name);
-        //     row = row.Replace("{HP}".PadRight(3), entity.Hp.ToString().PadLeft(3));
-        //     row = row.Replace("{MAX_HP}".PadRight(3), entity.MaxHp.ToString().PadLeft(3));
-        //     row = row.Replace("{Player Name}", _players[0].Name.ToString());
-
-        //     rows += row + "\n";
-        // }
         screen = screen.Replace("{COMBAT_ROWS}\n", rows);
         Console.WriteLine(screen);
+    }
+
+    private string AddRow(LivingEntity? enemy, Player? player)
+    {
+        string row = _rowTemplate;
+        AddLeftColumn(ref row, enemy);
+        AddRightColumn(ref row, player);
+        return row;
+    }
+
+    private void AddLeftColumn(ref string row, LivingEntity? enemy) 
+    {
+        string enemyName = enemy == null ? string.Empty : enemy.Name;
+        string hp = enemy == null ? string.Empty : enemy.Hp.ToString();
+        string maxHp = enemy == null ? string.Empty : enemy.MaxHp.ToString();
+        enemyName = enemyName.Length <= 12 ? enemyName.PadRight(12) : enemyName.PadRight(12).Substring(0, 9) + "...";
+        row = row.Replace("{NAME}".PadRight(12), enemyName);
+        row = row.Replace("{HP}".PadRight(3), hp.PadLeft(3));
+        row = row.Replace("{MAX_HP}".PadRight(3), maxHp.PadLeft(3));
+    }
+    private void AddRightColumn(ref string row, Player? player)
+    {
+        string playerName = player == null ? string.Empty : player.Name;
+        string hp = player == null ? string.Empty : player.Hp.ToString();
+        string maxHp = player == null ? string.Empty : player.MaxHp.ToString();
+        playerName = playerName.Length <= 12 ? playerName.PadRight(12) : playerName.PadRight(12).Substring(0, 10) + "...";
+        row = row.Replace("{Player Name}".PadRight(11), playerName);
+        row = row.Replace("{pHP}".PadRight(3), hp.PadLeft(2));
+        row = row.Replace("{pMAX_HP}".PadRight(3), maxHp.PadLeft(3));
     }
 
     public static void Test()
