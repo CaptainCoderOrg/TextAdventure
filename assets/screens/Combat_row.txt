@@ -1,1 +1,1 @@
-| {NAME}        | {HP} / {MAX_HP} | {Player Name} | {pHP} / {pMAX_HP} |
+| {NAME}       | {HP} / {MAX_HP} | {Player Name} |  {pHP} / {pMAX_HP} |

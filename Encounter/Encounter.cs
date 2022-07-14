@@ -31,18 +31,37 @@ public class Encounter
         LivingEntity currEntity;
         Player currPlayer;
 
-
-        for(int i = 0; i < _enemies.Count(); i++) {
-            currEntity = _enemies[i];
-            currPlayer = _players[i];
+        int rowCount = Math.Max(_enemies.Count, _players.Count);
+        for (int i = 0; i < rowCount; i++)
+        {
             string row = _rowTemplate;
-            string enemyName = currEntity.Name.Length <= 13 ? currEntity.Name.PadRight(13) : currEntity.Name.PadRight(13).Substring(0, 10) + "...";
-            row = row.Replace("{NAME}".PadRight(13), enemyName);
-            row = row.Replace("{HP}".PadRight(3), currEntity.Hp.ToString().PadLeft(3));
-            row = row.Replace("{MAX_HP}".PadRight(3), currEntity.MaxHp.ToString().PadLeft(3));
-            row = row.Replace("{Player Name}", currPlayer.Name.ToString());
-            row = row.Replace("{pHP}".PadRight(3), currPlayer.Hp.ToString().PadLeft(3));
-            row = row.Replace("{pMAX_HP}".PadRight(3), currPlayer.MaxHp.ToString().PadLeft(3));
+            if (i < _enemies.Count)
+            {
+                currEntity = _enemies[i];
+                string enemyName = currEntity.Name.Length <= 12 ? currEntity.Name.PadRight(12) : currEntity.Name.PadRight(12).Substring(0, 9) + "...";
+                row = row.Replace("{NAME}".PadRight(12), enemyName);
+                row = row.Replace("{HP}".PadRight(3), currEntity.Hp.ToString().PadLeft(3));
+                row = row.Replace("{MAX_HP}".PadRight(3), currEntity.MaxHp.ToString().PadLeft(3));
+            } 
+            else {
+                row = row.Replace("{NAME}".PadRight(12), string.Empty.PadRight(12));
+                row = row.Replace("{HP}".PadRight(3), string.Empty.PadLeft(3));
+                row = row.Replace("{MAX_HP}".PadRight(3), string.Empty.PadLeft(3));
+            }
+            if (i < _players.Count)
+            {
+                currPlayer = _players[i];
+                string playerName = currPlayer.Name.Length <= 12 ? currPlayer.Name.PadRight(12) : currPlayer.Name.PadRight(12).Substring(0, 10) + "...";
+                row = row.Replace("{Player Name}".PadRight(11), playerName);
+                row = row.Replace("{pHP}".PadRight(3), currPlayer.Hp.ToString().PadLeft(2));
+                row = row.Replace("{pMAX_HP}".PadRight(3), currPlayer.MaxHp.ToString().PadLeft(3));
+            }
+            else
+            {
+                row = row.Replace("{Player Name}".PadRight(11), string.Empty.PadRight(13));
+                row = row.Replace("{pHP}".PadRight(3), string.Empty.PadLeft(2));
+                row = row.Replace("{pMAX_HP}".PadRight(3), string.Empty.PadLeft(3));
+            }
             rows += row + "\n";
         }
 
@@ -63,8 +82,8 @@ public class Encounter
 
     public static void Test()
     {
-        GameState.Instance.Player.Name = "Bob the Destroyer of Many Worlds";
-        Encounter e = new Encounter(GameState.Instance.Player, new Goblin(), new TunnelWorm(), new Zombie());
+        GameState.Instance.Player.Name = "Bob the of Many Worlds";
+        Encounter e = new Encounter(GameState.Instance.Player, GameState.Instance.Player, GameState.Instance.Player, new Zombie());
         e.Display();
     }
 }
